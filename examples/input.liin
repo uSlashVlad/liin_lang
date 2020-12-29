@@ -1,0 +1,33 @@
+. You can enter here any numbers or numeruc expressions you want
+. For example 1 + 1 or ((10 * 10) - 6) / 78 - 0.59
+> print "Enter a number:"
+! inp << input
+> print "You entered:", inp
+> print "inp + 2:", inp + 2
+> print "inp - 2:", inp - 2
+> print "inp * 2:", inp * 2
+> print "inp / 2:", inp / 2
+> print "inp % 2:", inp % 2
+> print "inp^2:", inp * inp
+
+. You can enter here true/false or logic expression
+. For example 1 == 2 or (inp != 10) & true
+> print "Enter a \"true\" or \"false\":"
+! inp << input
+> if inp == true
+    !> b
+        > print "This is TRUE!"
+        ! a = 5
+> if inp == false
+    !> b
+        > print "This is false ;("
+        ! a = -5
+> run "b"
+> print "Var \"a\" is", a
+
+. You can enter here any string and any expressions
+. String should be in this quotes: ""
+. For example "Hello! " * 3 + "ke" * 4
+> print "Enter any string:"
+! inp << input
+> print "You entered:", inp
