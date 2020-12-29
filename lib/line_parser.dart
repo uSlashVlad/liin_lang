@@ -74,7 +74,8 @@ Map<String, dynamic> defineLine(String str) {
       });
     }
     result['def_type'] = def_type;
-  } else if (exps['comment_line'].hasMatch(str) || str == exps['whitespace'].firstMatch(str)[0]) {
+  } else if (exps['comment_line'].hasMatch(str) ||
+      str == exps['whitespace'].firstMatch(str)[0]) {
     result['type'] = LineType.Comment;
   } else {
     result['type'] = LineType.Empty;

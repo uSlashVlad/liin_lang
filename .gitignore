@@ -9,6 +9,7 @@ build/
 doc/api/
 
 # My ignores
-/old/
-/.comments/
+old/
+.comments/
 .vscode/
+tmp/

@@ -1,0 +1,14 @@
+! f << file "tmp/file.txt"
+! e << file_exists f
+
+. Create file if it isn't exists
+> if !e
+    > file_create f
+
+! i = 1
+> while i < 100
+    ! s << concat i, "\n"
+    > file_append f, s
+    ! i += 1
+
+> print "Completed!"

@@ -12,7 +12,7 @@ void main(List<String> args) async {
     stdout.write('>> ');
     var inputLine = stdin.readLineSync();
     while (inputLine != 'exit') {
-      await runLiin(codeLines: inputLine.split('\\'), clearAfter: false);
+      await runLiin(codeLines: inputLine.split('\\\\\\'), clearAfter: false);
       stdout.write('>> ');
       inputLine = stdin.readLineSync();
     }

@@ -5,9 +5,19 @@ import '../code_runner.dart';
 
 void commandIf(List args) {
   final bool exp = expEval(args[0]);
+  final block = defineBlockEnd(cur);
+  List<int> elseBlock;
+  if (lines[block[1]]['command'] == 'else') {
+    elseBlock = defineBlockEnd(block[1]);
+  }
+
   if (exp) {
-    final block = defineBlockEnd(cur);
     runBlock(block[0], block[1], block[3]);
+    if (elseBlock != null && elseBlock[2] == block[2]) {
+      cur = elseBlock[1] - 1;
+    }
+  } else if (elseBlock != null && elseBlock[2] == block[2]) {
+    runBlock(elseBlock[0], elseBlock[1], elseBlock[3]);
   }
 }
 

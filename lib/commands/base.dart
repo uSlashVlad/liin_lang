@@ -22,10 +22,15 @@ void commandLiin(List args) {
     lprint(iter.current(_liin[i]));
   }
 
-  lprint('\n${purple('.!')} ${yellow('version')} = ${green('"0.1.0 alpha"')}');
+  lprint('\n${purple('.!')} ${yellow('version')} = ${green('"0.2.0 alpha"')}');
   lprint('${purple('.!')} ${yellow('author')} = ${green('"u/vlad"')}');
 }
 
 void commandShowContext(List args) {
   print(comment('Vars: $context\nBlocks: $blocks'));
+}
+
+String commandConcat(List args) {
+  args = args.map((arg) => expEval(arg)).toList();
+  return args.join();
 }
