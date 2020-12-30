@@ -32,15 +32,21 @@ Future<LiinRunResult> runLiin({
     startTime = DateTime.now();
     runCode(codeLines);
   } else if (fileName != null) {
-    final l = File(fileName).readAsLinesSync();
-    startTime = DateTime.now();
-    runCode(l);
+    final f = File(fileName);
+    if (f.existsSync()) {
+      final l = f.readAsLinesSync();
+      startTime = DateTime.now();
+      runCode(l);
+    } else {
+      print(error('No such file "${f.path}"'));
+    }
   } else {
     print(error('No code specified!'));
   }
   final endTime = DateTime.now();
 
-  final executionTime = endTime.difference(startTime);
+  Duration executionTime;
+  if (startTime != null) executionTime = endTime.difference(startTime);
 
   final res = LiinRunResult(
     context: context,
