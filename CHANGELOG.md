@@ -1,3 +1,22 @@
+## 0.3.0
+
+Work with strings:
+- concat
+- slice
+- colorise
+- check length
+- replace
+- change case
+
+New example:
+- strings
+
+`concat` now is `str` and placed in strings module
+
+Complex blocks fix
+
+Improved commands documentation
+
 ## 0.2.0
 
 Work with files:

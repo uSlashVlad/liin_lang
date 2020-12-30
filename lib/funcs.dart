@@ -13,7 +13,7 @@ List<int> defineBlockEnd(int start) {
   int eor = lines[start]['indentation'];
 
   if (ior != eor) {
-    while (lines[start]['indentation'] == eor) {
+    while (lines[start]['indentation'] >= eor) {
       start++;
     }
   }

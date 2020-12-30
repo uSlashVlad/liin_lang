@@ -1,0 +1,65 @@
+. Simple concatenation
+! str1 = "Hello"
+! str2 = "World!"
+! str << str str1, " ", str2
+! l << str_length str
+! str << str_color str, 92
+> print "String", str, "has", l, "symbols!"
+
+. Definition of complex block
+!> rainbow_add
+    ! i = 0
+    ! c = start
+    ! rev = false
+    > while i < l
+        ! symbol << str_slice str, i, i + 1
+        ! symbol << str_color symbol, c
+        ! fin_str += symbol
+        ! i += 1
+        > if rev == false
+            ! c += step
+        > else
+            ! c -= step
+        > if c >= end
+            ! rev = true
+        > else
+            > if c <= start
+                ! rev = false
+. Definition vars for block runs
+! str = "#" * 11
+! l << str_length str
+! fin_str = ""
+
+. Blue line
+! start = 57
+! end = 87
+! step = 6
+> run "rainbow_add"
+! fin_str += " "
+. Purple line
+! start = 92
+! end = 122
+! step = 6
+> run "rainbow_add"
+! fin_str += " "
+. Orange line
+! start = 198
+! end = 228
+! step = 6
+> run "rainbow_add"
+! fin_str += " "
+. Pink line
+! start = 201
+! end = 231
+! step = 6
+> run "rainbow_add"
+! fin_str += "  |  "
+. Line of simple colors
+! start = 1
+! end = 6
+! step = 1
+> run "rainbow_add"
+
+! fin_str << str fin_str, "\n"
+! fin_str *= 5
+> print fin_str

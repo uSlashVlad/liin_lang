@@ -121,6 +121,7 @@ Map<String, dynamic> _defineCommand(String str) {
 }
 
 int _lineNum;
+
 /// Similar to defineLine, but defines multiple lines
 List<Map<String, dynamic>> defineMultiline(List<String> strs) {
   // ignore: omit_local_variable_types

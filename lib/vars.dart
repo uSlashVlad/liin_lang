@@ -1,6 +1,7 @@
 import 'commands/core.dart';
 import 'commands/base.dart';
 import 'commands/files.dart';
+import 'commands/strings.dart';
 
 /// Context for expression parsing
 Map<String, dynamic> context = {};
@@ -17,7 +18,6 @@ final Map<String, Function> commands = {
   'print': commandPrint,
   'liin': commandLiin,
   'show_context': commandShowContext,
-  'concat': commandConcat,
   // Files commands
   'file': commandFile,
   'file_create': commandFileCreate,
@@ -29,6 +29,17 @@ final Map<String, Function> commands = {
   'file_append': commandFileAppend,
   'file_exists': commandFileExists,
   'file_remove': commandFileRemove,
+  // Strings commands
+  'str': commandConcat,
+  'str_slice': commandSlice,
+  'str_length': commandLength,
+  'str_color_rgb': commandColorRGB,
+  'str_color': commandColorCode,
+  'str_replace_first': commandReplaceFirst,
+  'str_replace_all': commandReplaceAll,
+  'str_contains': commandContains,
+  'str_low': commandToLowerCase,
+  'str_up': commandToUpperCase,
 };
 
 /// Map that can contain blocks informations, like start, end and inforamtion

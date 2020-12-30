@@ -13,3 +13,4 @@ old/
 .comments/
 .vscode/
 tmp/
+pubspec.lock
