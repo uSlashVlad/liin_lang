@@ -14,3 +14,7 @@ old/
 .vscode/
 tmp/
 pubspec.lock
+
+# Binaries
+*.aot
+*.exe

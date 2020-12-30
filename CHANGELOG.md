@@ -1,3 +1,7 @@
+## 0.3.1
+
+Small rgb color command fix
+
 ## 0.3.0
 
 Work with strings:

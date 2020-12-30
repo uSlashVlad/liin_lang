@@ -212,7 +212,7 @@
 ## str_color_rgb
 **Пример**:
 ```liin
-! s << str_color_rgb "red!", 1, 0, 0, true
+! s << str_color_rgb "red!", 255, 0, 0, true
 ```
 **Аргументы**: [**0**]: String, [**1**]: num, [**2**]: num, [**3**]: num, ?[**4**]: bool
 **Возвращает**: String

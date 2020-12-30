@@ -27,9 +27,9 @@ int commandLength(List args) {
 /// Function of [str_color_rgb] command
 String commandColorRGB(List args) {
   final String str = expEval(args[0]);
-  final num red = expEval(args[1]),
-      green = expEval(args[2]),
-      blue = expEval(args[3]);
+  final double red = expEval(args[1]) / 255,
+      green = expEval(args[2]) / 255,
+      blue = expEval(args[3]) / 255;
   var bg = false;
   if (args.length > 4) bg = expEval(args[4]);
 
