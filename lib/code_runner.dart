@@ -4,12 +4,15 @@ import 'funcs.dart';
 import 'line_parser.dart';
 import 'colors.dart';
 
+/// Runs specified lines of code.
+/// It includes parsing, analysis, preprocessing and execution
 void runCode(List<String> strs) {
   strs.add('');
   lines = defineMultiline(strs);
   runBlock(0, lines.length, 0);
 }
 
+/// Clears all vars that can be used while code runing
 void clearVars() {
   context = {};
   blocks = {};
@@ -20,6 +23,7 @@ void clearVars() {
   indent = 0;
 }
 
+/// Runs some specific block of code
 void runBlock(int start, int end, int newIndent) {
   final oldIndent = indent;
   indent = newIndent;
@@ -37,7 +41,7 @@ void runBlock(int start, int end, int newIndent) {
           final name = ln['name'];
           if (defType == DefinitionType.Simple) {
             // Just a simple definition
-            updateVariable(name, expEval(ln['value']));
+            _updateVariable(name, expEval(ln['value']));
           } else if (defType == DefinitionType.Complex) {
             // Complex definition (with math operator)
             final String op = ln['operator'];
@@ -55,11 +59,11 @@ void runBlock(int start, int end, int newIndent) {
             } else if (op == '%=') {
               curVal %= newVal;
             }
-            updateVariable(name, curVal);
+            _updateVariable(name, curVal);
           } else if (defType == DefinitionType.Command) {
             // Command definition
             // Calling command and putting value of it in context
-            updateVariable(name,
+            _updateVariable(name,
                 commands[ln['value']['command']](ln['value']['arguments']));
           } else if (defType == DefinitionType.Undef) {
             // Undef
@@ -79,4 +83,4 @@ void runBlock(int start, int end, int newIndent) {
   cur--;
 }
 
-void updateVariable(String name, dynamic value) => context[name] = value;
+void _updateVariable(String name, dynamic value) => context[name] = value;

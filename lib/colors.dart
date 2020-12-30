@@ -1,13 +1,17 @@
 import 'package:ansicolor/ansicolor.dart';
 
+/// Pen for errors
 final error = AnsiPen()..xterm(1);
+/// Pen for additional information
 final comment = AnsiPen()..gray(level: 0.4);
 
+// Some pens with some diffirent colors
 final pink = AnsiPen()..xterm(198);
 final purple = AnsiPen()..xterm(129);
 final yellow = AnsiPen()..yellow(bold: true);
 final green = AnsiPen()..green(bold: true);
 
+/// Iterator for rainbow text :)
 class RainbowIterator implements Iterator<AnsiPen> {
   RainbowIterator(this.start, this.step, [this.max]);
   final int start, max;

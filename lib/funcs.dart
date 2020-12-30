@@ -2,9 +2,10 @@ import 'dart:io';
 import 'package:expressions/expressions.dart';
 import 'vars.dart';
 
-final evaluator = const ExpressionEvaluator();
+final _evaluator = const ExpressionEvaluator();
 
-dynamic expEval(Expression exp) => evaluator.eval(exp, context);
+/// Evaluates expressions and returns it's value
+dynamic expEval(Expression exp) => _evaluator.eval(exp, context);
 
 /// 0: start, 1: end, 2: indent_original, 3: indent_new
 List<int> defineBlockEnd(int start) {
@@ -20,11 +21,13 @@ List<int> defineBlockEnd(int start) {
   return [sstart + 1, (ior != eor) ? start : sstart, ior, eor];
 }
 
+/// Function that prints text to terminal and adds this text into output list
 void lprint(String content) {
   output.add(content);
   print(content);
 }
 
+/// Iterator for inserted input
 class _InputIterator implements Iterator<String> {
   int _curIndex = 0;
 
@@ -40,6 +43,8 @@ class _InputIterator implements Iterator<String> {
 
 final _inp = _InputIterator();
 
+/// Function for work with input iterator.
+/// Returns a value entered in terminal or value inserted before running
 String linput() {
   if (input == null) {
     return stdin.readLineSync();

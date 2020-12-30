@@ -2,6 +2,8 @@ import 'dart:io';
 import 'package:liin_lang/liin_lang.dart';
 import 'package:liin_lang/colors.dart';
 
+/// Just a main function that runs if launch this file.
+/// You shouldn't call this function by hands
 void main(List<String> args) async {
   if (args.isNotEmpty) {
     final fileName = args[0];

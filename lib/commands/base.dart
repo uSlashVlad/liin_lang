@@ -2,6 +2,7 @@ import '../funcs.dart';
 import '../vars.dart';
 import '../colors.dart';
 
+/// Function of [print] command
 void commandPrint(List args) {
   args = args.map((arg) => expEval(arg)).toList();
   lprint(args.join(' '));
@@ -15,6 +16,7 @@ const _liin = [
   '  ▀██▄  ██  ██  ██  ██',
 ];
 
+/// Function of [liin] command
 void commandLiin(List args) {
   var iter = RainbowIterator(196, 6);
   for (var i = 0; i < 5; i++) {
@@ -26,10 +28,12 @@ void commandLiin(List args) {
   lprint('${purple('.!')} ${yellow('author')} = ${green('"u/vlad"')}');
 }
 
+/// Function of [show_context] command
 void commandShowContext(List args) {
   print(comment('Vars: $context\nBlocks: $blocks'));
 }
 
+/// Function of [concat] command
 String commandConcat(List args) {
   args = args.map((arg) => expEval(arg)).toList();
   return args.join();

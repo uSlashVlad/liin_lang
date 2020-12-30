@@ -1,3 +1,4 @@
+/// Main types of lines
 enum LineType {
   Definition,
   Command,
@@ -5,6 +6,7 @@ enum LineType {
   Empty,
 }
 
+/// Main types of definitions
 enum DefinitionType {
   Simple,
   Complex,

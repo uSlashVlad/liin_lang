@@ -3,6 +3,7 @@ import '../vars.dart';
 import '../funcs.dart';
 import '../code_runner.dart';
 
+/// Function of [if] command
 void commandIf(List args) {
   final bool exp = expEval(args[0]);
   final block = defineBlockEnd(cur);
@@ -21,6 +22,7 @@ void commandIf(List args) {
   }
 }
 
+/// Function of [count] command
 void commandCount(List args) {
   final num = expEval(args[0]);
   final block = defineBlockEnd(cur);
@@ -29,6 +31,7 @@ void commandCount(List args) {
   }
 }
 
+/// Function of [while] command
 void commandWhile(List args) {
   bool exp = expEval(args[0]);
   if (exp) {
@@ -40,6 +43,7 @@ void commandWhile(List args) {
   }
 }
 
+/// Function of [run] command
 void commandRun(List args) {
   final String name = expEval(args[0]);
   final block = blocks[name];
@@ -48,4 +52,5 @@ void commandRun(List args) {
   cur = r;
 }
 
+/// Function of [input] command
 dynamic commandInput(List args) => expEval(Expression.parse(linput()));

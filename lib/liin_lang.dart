@@ -3,6 +3,8 @@ import 'vars.dart';
 import 'colors.dart';
 import 'code_runner.dart';
 
+/// Model of program execution result.
+/// Contains some internal information, output and execution time
 class LiinRunResult {
   LiinRunResult({
     this.context,
@@ -16,6 +18,7 @@ class LiinRunResult {
   final Duration executionTime;
 }
 
+/// Function for running some liin code
 Future<LiinRunResult> runLiin({
   List<String> codeLines,
   String fileName,

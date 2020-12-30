@@ -2,8 +2,10 @@ import 'commands/core.dart';
 import 'commands/base.dart';
 import 'commands/files.dart';
 
+/// Context for expression parsing
 Map<String, dynamic> context = {};
 
+/// List of commands that available for calling
 final Map<String, Function> commands = {
   // Core commands
   'if': commandIf,
@@ -29,12 +31,19 @@ final Map<String, Function> commands = {
   'file_remove': commandFileRemove,
 };
 
+/// Map that can contain blocks informations, like start, end and inforamtion
+/// about indentation
 Map<String, List<int>> blocks = {};
 
+/// Contains lines of code. Has values after running code
 List<Map<String, dynamic>> lines;
 
+/// List of input. Has values if they were specified before code running
 List<String> input;
+/// List of all outputs of lprint
 List<String> output = [];
 
+/// Current line
 int cur = 0;
+/// Current indentation
 int indent = 0;

@@ -3,8 +3,8 @@ import 'enums.dart';
 import 'colors.dart';
 import 'funcs.dart';
 
-// Map with regular expressions
-final Map<String, RegExp> exps = {
+/// Map with regular expressions
+final Map<String, RegExp> _exps = {
   'command_line': RegExp(r'^\s*>\s*'),
   'definition_line': RegExp(r'^\s*(![xX]|!>|!)\s*'),
   'definition_1type_capture': RegExp(r'^\s*(![xX]|!>|!)\s*(\w+)'),
@@ -18,32 +18,33 @@ final Map<String, RegExp> exps = {
   'indent': RegExp(r'^\s'),
 };
 
+/// Parses, analyse and preprocess lines of liin code
 Map<String, dynamic> defineLine(String str) {
   // ignore: omit_local_variable_types
   final Map<String, dynamic> result = {};
 
   // Defining indentation level
   var indent = 0;
-  while (str.startsWith(exps['indent'])) {
+  while (str.startsWith(_exps['indent'])) {
     indent++;
-    str = str.replaceFirst(exps['indent'], '');
+    str = str.replaceFirst(_exps['indent'], '');
   }
   result['indentation'] = indent;
 
-  if (exps['command_line'].hasMatch(str)) {
+  if (_exps['command_line'].hasMatch(str)) {
     // If this line is a command
     result['type'] = LineType.Command;
-    str = str.replaceFirst(exps['command_line'], '');
+    str = str.replaceFirst(_exps['command_line'], '');
 
     result.addAll(_defineCommand(str));
-  } else if (exps['definition_line'].hasMatch(str)) {
+  } else if (_exps['definition_line'].hasMatch(str)) {
     // If this line is a definition
     result['type'] = LineType.Definition;
 
     // Capturing, spliting and clearing
     DefinitionType def_type;
-    final m1 = exps['definition_1type_capture'].firstMatch(str);
-    str = str.replaceFirst(exps['definition_line'], '');
+    final m1 = _exps['definition_1type_capture'].firstMatch(str);
+    str = str.replaceFirst(_exps['definition_line'], '');
 
     if (m1[1].toLowerCase() == '!x') {
       def_type = DefinitionType.Undef;
@@ -53,7 +54,7 @@ Map<String, dynamic> defineLine(String str) {
       result['name'] = m1[2];
     } else {
       // Checking operators
-      final m = exps['definition_capture'].firstMatch(str);
+      final m = _exps['definition_capture'].firstMatch(str);
       final op = m[2];
       dynamic other = m[3];
 
@@ -74,12 +75,12 @@ Map<String, dynamic> defineLine(String str) {
       });
     }
     result['def_type'] = def_type;
-  } else if (exps['comment_line'].hasMatch(str) ||
-      str == exps['whitespace'].firstMatch(str)[0]) {
+  } else if (_exps['comment_line'].hasMatch(str) ||
+      str == _exps['whitespace'].firstMatch(str)[0]) {
     result['type'] = LineType.Comment;
   } else {
     result['type'] = LineType.Empty;
-    lprint(error('Error while checking line $lineNum. Skipping...'));
+    lprint(error('Error while checking line $_lineNum. Skipping...'));
   }
 
   return result;
@@ -87,20 +88,20 @@ Map<String, dynamic> defineLine(String str) {
 
 Map<String, dynamic> _defineCommand(String str) {
   // Getting name
-  final name = exps['word'].firstMatch(str)[0];
-  str = str.replaceFirst(name, '').replaceFirst(exps['whitespace'], '');
+  final name = _exps['word'].firstMatch(str)[0];
+  str = str.replaceFirst(name, '').replaceFirst(_exps['whitespace'], '');
 
   // Getting arguments
   final arguments = [];
   while (str.isNotEmpty) {
     // lprint(str);
 
-    final stringMatch = exps['quotes_expression'].firstMatch(str);
+    final stringMatch = _exps['quotes_expression'].firstMatch(str);
     if (stringMatch == null) {
       final mathExp = str.split(',')[0];
       // lprint(mathExp);
       arguments
-          .add(Expression.parse(mathExp.replaceAll(exps['whitespace'], '')));
+          .add(Expression.parse(mathExp.replaceAll(_exps['whitespace'], '')));
       str = str.replaceFirst(mathExp, '');
     } else {
       // lprint(stringMatch[0]);
@@ -108,9 +109,9 @@ Map<String, dynamic> _defineCommand(String str) {
       str = str.replaceFirst(stringMatch[0], '');
     }
 
-    str = str.replaceFirst(exps['whitespace'], '');
+    str = str.replaceFirst(_exps['whitespace'], '');
     if (str.startsWith(',')) str = str.replaceFirst(',', '');
-    str = str.replaceFirst(exps['whitespace'], '');
+    str = str.replaceFirst(_exps['whitespace'], '');
   }
 
   return {
@@ -119,16 +120,17 @@ Map<String, dynamic> _defineCommand(String str) {
   };
 }
 
-int lineNum;
+int _lineNum;
+/// Similar to defineLine, but defines multiple lines
 List<Map<String, dynamic>> defineMultiline(List<String> strs) {
   // ignore: omit_local_variable_types
   final List<Map<String, dynamic>> result = [];
 
-  for (lineNum = 1; lineNum <= strs.length; lineNum++) {
+  for (_lineNum = 1; _lineNum <= strs.length; _lineNum++) {
     try {
-      result.add(defineLine(strs[lineNum - 1]));
+      result.add(defineLine(strs[_lineNum - 1]));
     } catch (e) {
-      lprint(error('Error while parsing line $lineNum. Skipping...\n$e'));
+      lprint(error('Error while parsing line $_lineNum. Skipping...\n$e'));
     }
   }
 
