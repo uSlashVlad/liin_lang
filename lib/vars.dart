@@ -51,10 +51,12 @@ List<Map<String, dynamic>> lines;
 
 /// List of input. Has values if they were specified before code running
 List<String> input;
+
 /// List of all outputs of lprint
 List<String> output = [];
 
 /// Current line
 int cur = 0;
+
 /// Current indentation
 int indent = 0;

@@ -1,3 +1,11 @@
+## 0.3.3
+
+Added more frienly interpreter usage
+
+Some collections fixes
+
+Better README
+
 ## 0.3.2
 
 Some interpreter improvements

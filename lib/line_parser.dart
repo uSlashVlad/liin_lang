@@ -15,6 +15,8 @@ final Map<String, RegExp> _exps = {
   'guaranted_whitespace': RegExp(r'\s'),
   'quotes_expression':
       RegExp(r'^([\+\*]?\s*("(?:[^"\\]|\\.)*"|[0-9]+)\s*[\+\*]?)+'),
+  'parentheses_expression': RegExp(r'^(\s*\+?\s*\[[^\]]*\]\s*\+?\s*)+'),
+  'curly_braces_expression': RegExp(r'^{[^}]*}'),
   'indent': RegExp(r'^\s'),
 };
 
@@ -95,14 +97,23 @@ Map<String, dynamic> _defineCommand(String str) {
   final arguments = [];
   while (str.isNotEmpty) {
     // lprint(str);
-
+    // Searching for String expressions
     final stringMatch = _exps['quotes_expression'].firstMatch(str);
     if (stringMatch == null) {
-      final mathExp = str.split(',')[0];
-      // lprint(mathExp);
-      arguments
-          .add(Expression.parse(mathExp.replaceAll(_exps['whitespace'], '')));
-      str = str.replaceFirst(mathExp, '');
+      // Searching for collections expressions
+      var bracketsMatch = _exps['parentheses_expression'].firstMatch(str);
+      bracketsMatch ??= _exps['curly_braces_expression'].firstMatch(str);
+      if (bracketsMatch == null) {
+        // If it is normal math expression
+        final mathExp = str.split(',')[0];
+        // lprint(mathExp);
+        arguments.add(Expression.parse(mathExp));
+        str = str.replaceFirst(mathExp, '');
+      } else {
+        // lprint(bracketsMatch[0]);
+        arguments.add(Expression.parse(bracketsMatch[0]));
+        str = str.replaceFirst(bracketsMatch[0], '');
+      }
     } else {
       // lprint(stringMatch[0]);
       arguments.add(Expression.parse(stringMatch[0]));
