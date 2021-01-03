@@ -6,9 +6,10 @@ import 'colors.dart';
 
 /// Runs specified lines of code.
 /// It includes parsing, analysis, preprocessing and execution
-void runCode(List<String> strs) {
+void runCode(List<String> strs) async {
   strs.add('');
-  lines = defineMultiline(strs);
+  lines = await defineMultiline(strs);
+  // print(lines);
   runBlock(0, lines.length, 0);
 }
 
@@ -21,6 +22,7 @@ void clearVars() {
   output = [];
   cur = 0;
   indent = 0;
+  runFilePath = null;
 }
 
 /// Runs some specific block of code

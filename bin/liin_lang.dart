@@ -31,7 +31,7 @@ void main(List<String> args) async {
     } else {
       // Run file
       final fileName = args[0];
-      final r = await runLiin(fileName: fileName);
+      final r = await runLiin(filePath: fileName);
       if (r.executionTime != null) {
         print(comment('Executed in ${r.executionTime.inMilliseconds}ms'));
       }

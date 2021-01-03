@@ -1,0 +1,4 @@
+# include a.liin
+> print "Ha-ha, it's main code"
+# include b.liin
+> print "This is the end of main code"

@@ -24,7 +24,7 @@ void commandLiin(List args) {
     lprint(iter.current(_liin[i]));
   }
 
-  lprint('\n${purple('.!')} ${yellow('version')} = ${green('"0.3.3 alpha"')}');
+  lprint('\n${purple('.!')} ${yellow('version')} = ${green('"0.4.0 alpha"')}');
   lprint('${purple('.!')} ${yellow('author')} = ${green('"u/vlad"')}');
 }
 

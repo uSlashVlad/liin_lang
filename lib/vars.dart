@@ -2,6 +2,8 @@ import 'commands/core.dart';
 import 'commands/base.dart';
 import 'commands/files.dart';
 import 'commands/strings.dart';
+import 'commands/collections.dart';
+import 'commands/types.dart';
 
 /// Context for expression parsing
 Map<String, dynamic> context = {};
@@ -40,6 +42,22 @@ final Map<String, Function> commands = {
   'str_contains': commandContains,
   'str_low': commandToLowerCase,
   'str_up': commandToUpperCase,
+  // Collections commands
+  'cl_remove': commandRemove,
+  'cl_is_empty': commandIsEmpty,
+  'cl_length': commandCollectionLength,
+  'cl_place': commandPlace,
+  'cl_join': commandJoin,
+  // Types commands
+  'type_is_string': commandIsString,
+  'type_is_num': commandIsNum,
+  'type_is_int': commandIsInt,
+  'type_is_bool': commandIsBool,
+  'type_is_cl': commandIsCollection,
+  'type_is_list': commandIsList,
+  'type_is_map': commandIsMap,
+  'type_is_file': commandIsFile,
+  'type_str': commandType,
 };
 
 /// Map that can contain blocks informations, like start, end and inforamtion
@@ -60,3 +78,6 @@ int cur = 0;
 
 /// Current indentation
 int indent = 0;
+
+/// Path to current file
+String runFilePath;

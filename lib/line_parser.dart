@@ -1,15 +1,20 @@
+import 'dart:io';
+
 import 'package:expressions/expressions.dart';
 import 'enums.dart';
 import 'colors.dart';
 import 'funcs.dart';
+import 'settings_processor.dart';
 
 /// Map with regular expressions
 final Map<String, RegExp> _exps = {
   'command_line': RegExp(r'^\s*>\s*'),
-  'definition_line': RegExp(r'^\s*(![xX]|!>|!)\s*'),
+  'definition_line': RegExp(r'^\s*(![xX]|!>|!)'),
   'definition_1type_capture': RegExp(r'^\s*(![xX]|!>|!)\s*(\w+)'),
   'definition_capture': RegExp(r'(\w+)\s*(=|\+=|-=|\*=|\/=|%=|<<)\s*(.*)'),
-  'comment_line': RegExp(r'\s*\..*'),
+  'comment_line': RegExp(r'^\s*\..*'),
+  'setting_line': RegExp(r'^\s*#'),
+  'setting_capture': RegExp(r'^\s*#\s*(\w+)\s*(.+)'),
   'word': RegExp(r'\w+'),
   'whitespace': RegExp(r'\s*'),
   'guaranted_whitespace': RegExp(r'\s'),
@@ -21,7 +26,7 @@ final Map<String, RegExp> _exps = {
 };
 
 /// Parses, analyse and preprocess lines of liin code
-Map<String, dynamic> defineLine(String str) {
+Future<List<Map<String, dynamic>>> defineLine(String str) async {
   // ignore: omit_local_variable_types
   final Map<String, dynamic> result = {};
 
@@ -80,12 +85,27 @@ Map<String, dynamic> defineLine(String str) {
   } else if (_exps['comment_line'].hasMatch(str) ||
       str == _exps['whitespace'].firstMatch(str)[0]) {
     result['type'] = LineType.Comment;
+  } else if (_exps['setting_line'].hasMatch(str)) {
+    final match = _exps['setting_capture'].firstMatch(str);
+    if (match != null) {
+      final name = match[1];
+      final arg = match[2];
+
+      if (name == 'include') {
+        return includeLines(arg);
+      } else {
+        lprint(error(
+            'Error while processing setting in line $_lineNum. Exiting...'));
+      }
+    } else {
+      lprint(error('Error while checking line $_lineNum. Exiting...'));
+    }
   } else {
     result['type'] = LineType.Empty;
-    lprint(error('Error while checking line $_lineNum. Skipping...'));
+    lprint(error('Error while checking line $_lineNum. Exiting...'));
   }
 
-  return result;
+  return [result];
 }
 
 Map<String, dynamic> _defineCommand(String str) {
@@ -134,15 +154,22 @@ Map<String, dynamic> _defineCommand(String str) {
 int _lineNum;
 
 /// Similar to defineLine, but defines multiple lines
-List<Map<String, dynamic>> defineMultiline(List<String> strs) {
+Future<List<Map<String, dynamic>>> defineMultiline(List<String> strs) async {
   // ignore: omit_local_variable_types
   final List<Map<String, dynamic>> result = [];
 
-  for (_lineNum = 1; _lineNum <= strs.length; _lineNum++) {
+  for (var ln = 1; ln <= strs.length; ln++) {
+    _lineNum = ln;
     try {
-      result.add(defineLine(strs[_lineNum - 1]));
+      final lines = await defineLine(strs[_lineNum - 1]);
+      if (lines != null && lines.isNotEmpty) {
+        result.addAll(lines);
+      } else {
+        // lprint(error());
+      }
     } catch (e) {
-      lprint(error('Error while parsing line $_lineNum. Skipping...\n$e'));
+      lprint(error('Error while parsing line $_lineNum. Exiting...\n$e'));
+      exit(2);
     }
   }
 

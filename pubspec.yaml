@@ -1,6 +1,6 @@
 name: liin_lang
 description: A simple functional programing language for creating automatization instructions like work with media files, text files and others
-version: 0.3.3
+version: 0.4.0
 repository: https://github.com/uslashvlad/liin_lang
 publish_to: https://pub.dev
 # homepage: https://nothing
@@ -11,6 +11,7 @@ environment:
 dependencies:
   expressions: ^0.1.5
   ansicolor: ^1.1.1
+  path: ^1.7.0
 
 dev_dependencies:
   pedantic: ^1.9.2

@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:expressions/expressions.dart';
+import 'package:path/path.dart' as p;
 import 'vars.dart';
 
 final _evaluator = const ExpressionEvaluator();
@@ -54,3 +55,5 @@ String linput() {
     return newInp;
   }
 }
+
+String getFilePath(String originalPath) => p.join(runFilePath, originalPath);

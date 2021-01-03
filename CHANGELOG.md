@@ -1,4 +1,15 @@
-## 0.3.3
+## 0.4.0 alpha
+
+Work with collections (list and maps)
+
+Work with types
+
+Code including (First step to modules).
+You can include code from local directories and from internet
+
+Now parsing and processing is async
+
+## 0.3.3 alpha
 
 Added more frienly interpreter usage
 
@@ -6,15 +17,15 @@ Some collections fixes
 
 Better README
 
-## 0.3.2
+## 0.3.2 alpha
 
 Some interpreter improvements
 
-## 0.3.1
+## 0.3.1 alpha
 
 Small rgb color command fix
 
-## 0.3.0
+## 0.3.0 alpha
 
 Work with strings:
 - concat
@@ -33,7 +44,7 @@ Complex blocks fix
 
 Improved commands documentation
 
-## 0.2.0
+## 0.2.0 alpha
 
 Work with files:
 - create
@@ -51,6 +62,6 @@ Concatination added
 
 Line spliting changed from `\` to `\\\`
 
-## 0.1.0
+## 0.1.0 alpha
 
 Initial version of liin

@@ -1,0 +1,24 @@
+! l = [1, 2, 3, 4, 5]
+! le << cl_length l
+> print l[2], "|", l
+
+> cl_remove l, 2
+! le << cl_length l
+> print l[2], "|", l
+
+! l += [6, 7, 8, 9]
+! le << cl_length l
+> print l[2], "|", l
+
+! sl << cl_join l, " - "
+> print sl
+
+! m = {"a": "b", "c": "d"}
+> cl_place m, "e", "f"
+> print m
+
+! t1 << type_str l
+! t2 << type_str le
+! t3 << type_str sl
+! t4 << type_str m
+> print "l is", t1, "le is", t2, "sl is", t3, "m is", t4

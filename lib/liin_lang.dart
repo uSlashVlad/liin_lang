@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:path/path.dart' as p;
 import 'vars.dart';
 import 'colors.dart';
 import 'code_runner.dart';
@@ -21,7 +22,7 @@ class LiinRunResult {
 /// Function for running some liin code
 Future<LiinRunResult> runLiin({
   List<String> codeLines,
-  String fileName,
+  String filePath,
   List<String> runInput,
   bool clearAfter = true,
 }) async {
@@ -30,13 +31,15 @@ Future<LiinRunResult> runLiin({
   DateTime startTime;
   if (codeLines != null) {
     startTime = DateTime.now();
-    runCode(codeLines);
-  } else if (fileName != null) {
-    final f = File(fileName);
+    await runCode(codeLines);
+  } else if (filePath != null) {
+    final newPath = p.joinAll(p.split(filePath)..removeLast());
+    runFilePath = newPath;
+    final f = File(filePath);
     if (f.existsSync()) {
       final l = f.readAsLinesSync();
       startTime = DateTime.now();
-      runCode(l);
+      await runCode(l);
     } else {
       print(error('No such file "${f.path}"'));
     }
