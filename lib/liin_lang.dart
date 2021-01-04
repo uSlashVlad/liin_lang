@@ -13,22 +13,22 @@ class LiinRunResult {
     this.output,
     this.executionTime,
   });
-  final Map<String, dynamic> context;
-  final Map<String, List<int>> blocks;
-  final List<String> output;
-  final Duration executionTime;
+  final Map<String?, dynamic>? context;
+  final Map<String?, List<int?>>? blocks;
+  final List<String?>? output;
+  final Duration? executionTime;
 }
 
 /// Function for running some liin code
 Future<LiinRunResult> runLiin({
-  List<String> codeLines,
-  String filePath,
-  List<String> runInput,
+  List<String>? codeLines,
+  String? filePath,
+  List<String>? runInput,
   bool clearAfter = true,
 }) async {
   if (runInput != null) input = runInput;
 
-  DateTime startTime;
+  DateTime? startTime;
   if (codeLines != null) {
     startTime = DateTime.now();
     await runCode(codeLines);
@@ -48,7 +48,7 @@ Future<LiinRunResult> runLiin({
   }
   final endTime = DateTime.now();
 
-  Duration executionTime;
+  Duration? executionTime;
   if (startTime != null) executionTime = endTime.difference(startTime);
 
   final res = LiinRunResult(

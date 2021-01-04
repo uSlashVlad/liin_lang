@@ -33,12 +33,12 @@ class _InputIterator implements Iterator<String> {
   int _curIndex = 0;
 
   @override
-  String get current => input[_curIndex];
+  String get current => input![_curIndex];
 
   @override
   bool moveNext() {
     _curIndex++;
-    return (_curIndex < input.length) ? true : false;
+    return (_curIndex < input!.length) ? true : false;
   }
 }
 
@@ -48,7 +48,7 @@ final _inp = _InputIterator();
 /// Returns a value entered in terminal or value inserted before running
 String linput() {
   if (input == null) {
-    return stdin.readLineSync();
+    return stdin.readLineSync()!;
   } else {
     final newInp = _inp.current;
     _inp.moveNext();
@@ -56,4 +56,4 @@ String linput() {
   }
 }
 
-String getFilePath(String originalPath) => p.join(runFilePath, originalPath);
+String getFilePath(String? originalPath) => p.join(runFilePath!, originalPath);

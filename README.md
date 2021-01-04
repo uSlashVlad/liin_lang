@@ -71,7 +71,7 @@ void main() async {
 
 1) После импорта модуля в проект, вызвать интерпретатор можно через
 ```bash
-pub run 'liin_lang:interpreter.dart'
+pub run liin_lang
 ```
 
 2) Использовать `pub global` для "установки" и "удаления"

@@ -9,7 +9,7 @@ final httpClient = HttpClient();
 int includeCount = 0;
 const includeMaxCount = 1000;
 
-Future<List<Map<String, dynamic>>> includeLines(String path) async {
+Future<List<Map<String, dynamic>>?> includeLines(String? path) async {
   try {
     if (includeCount < includeMaxCount) {
       path = getFilePath(path);

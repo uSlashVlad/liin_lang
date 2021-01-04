@@ -1,3 +1,7 @@
+## 0.5.0 alpha **(nullsafety)**
+
+Big migration to null safety. Here will be also some changes, but it is first commit for null safety
+
 ## 0.4.0 alpha
 
 Work with collections (list and maps)

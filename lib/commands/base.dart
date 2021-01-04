@@ -21,7 +21,7 @@ void commandLiin(List args) {
   var iter = RainbowIterator(196, 6);
   for (var i = 0; i < 5; i++) {
     iter.moveNext();
-    lprint(iter.current(_liin[i]));
+    lprint(iter.current!(_liin[i]));
   }
 
   lprint('\n${purple('.!')} ${yellow('version')} = ${green('"0.4.0 alpha"')}');

@@ -13,16 +13,17 @@ final yellow = AnsiPen()..yellow(bold: true);
 final green = AnsiPen()..green(bold: true);
 
 /// Iterator for rainbow text :)
-class RainbowIterator implements Iterator<AnsiPen> {
+class RainbowIterator implements Iterator<AnsiPen?> {
   RainbowIterator(this.start, this.step, [this.max]);
-  final int start, max;
+  final int start;
+  final int? max;
   int step;
 
-  AnsiPen _currentPen;
+  AnsiPen? _currentPen;
   int _curIndex = -1;
 
   @override
-  AnsiPen get current => _currentPen;
+  AnsiPen? get current => _currentPen;
 
   @override
   bool moveNext() {
@@ -31,7 +32,7 @@ class RainbowIterator implements Iterator<AnsiPen> {
     _currentPen = xtermPen(_curIndex);
     _curIndex += step;
 
-    if (max != null && (_curIndex >= max || _curIndex <= start)) {
+    if (max != null && (_curIndex >= max! || _curIndex <= start)) {
       step = -step;
     }
 

@@ -6,7 +6,7 @@ import 'colors.dart';
 
 /// Runs specified lines of code.
 /// It includes parsing, analysis, preprocessing and execution
-void runCode(List<String> strs) async {
+Future<void> runCode(List<String> strs) async {
   strs.add('');
   lines = await defineMultiline(strs);
   // print(lines);
@@ -17,7 +17,7 @@ void runCode(List<String> strs) async {
 void clearVars() {
   context = {};
   blocks = {};
-  lines = null;
+  lines = [];
   input = null;
   output = [];
   cur = 0;
@@ -37,16 +37,16 @@ void runBlock(int start, int end, int newIndent) {
       if (ln['indentation'] == indent) {
         // Process line
         if (ln['type'] == LineType.Command) {
-          commands[ln['command']](ln['arguments']);
+          commands[ln['command']]!(ln['arguments']);
         } else if (ln['type'] == LineType.Definition) {
-          final DefinitionType defType = ln['def_type'];
+          final DefinitionType? defType = ln['def_type'];
           final name = ln['name'];
           if (defType == DefinitionType.Simple) {
             // Just a simple definition
             _updateVariable(name, expEval(ln['value']));
           } else if (defType == DefinitionType.Complex) {
             // Complex definition (with math operator)
-            final String op = ln['operator'];
+            final String? op = ln['operator'];
             var curVal = context[name];
             var newVal = expEval(ln['value']);
             // Checking operators
@@ -66,7 +66,7 @@ void runBlock(int start, int end, int newIndent) {
             // Command definition
             // Calling command and putting value of it in context
             _updateVariable(name,
-                commands[ln['value']['command']](ln['value']['arguments']));
+                commands[ln['value']['command']]!(ln['value']['arguments']));
           } else if (defType == DefinitionType.Undef) {
             // Undef
             context.remove(name);

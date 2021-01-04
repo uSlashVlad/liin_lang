@@ -6,6 +6,6 @@ void main() async {
     '! b = 2',
     '! result = a + b',
   ]);
-  print('Executed in ${r.executionTime.inMilliseconds}ms');
-  print('Result is ${r.context['result']}');
+  print('Executed in ${r.executionTime!.inMilliseconds}ms');
+  print('Result is ${r.context!['result']}');
 }

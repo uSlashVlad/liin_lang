@@ -65,10 +65,10 @@ final Map<String, Function> commands = {
 Map<String, List<int>> blocks = {};
 
 /// Contains lines of code. Has values after running code
-List<Map<String, dynamic>> lines;
+late List<Map<String, dynamic>> lines;
 
 /// List of input. Has values if they were specified before code running
-List<String> input;
+List<String>? input;
 
 /// List of all outputs of lprint
 List<String> output = [];
@@ -80,4 +80,4 @@ int cur = 0;
 int indent = 0;
 
 /// Path to current file
-String runFilePath;
+String? runFilePath;

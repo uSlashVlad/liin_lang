@@ -11,7 +11,7 @@ String commandConcat(List args) {
 String commandSlice(List args) {
   final String str = expEval(args[0]);
   final int start = expEval(args[1]);
-  var end = str.length;
+  int? end = str.length;
   if (args.length > 2) {
     end = expEval(args[2]);
   }
@@ -25,51 +25,51 @@ int commandLength(List args) {
 }
 
 /// Function of [str_color_rgb] command
-String commandColorRGB(List args) {
-  final String str = expEval(args[0]);
-  final double red = expEval(args[1]) / 255,
+String? commandColorRGB(List args) {
+  final String? str = expEval(args[0]);
+  final double? red = expEval(args[1]) / 255,
       green = expEval(args[2]) / 255,
       blue = expEval(args[3]) / 255;
-  var bg = false;
+  bool? bg = false;
   if (args.length > 4) bg = expEval(args[4]);
 
-  final pen = rgbPen(red, green, blue, bg);
+  final pen = rgbPen(red!, green!, blue!, bg!);
 
-  return pen(str);
+  return pen(str!);
 }
 
 /// Function of [str_color] command
-String commandColorCode(List args) {
-  final String str = expEval(args[0]);
+String? commandColorCode(List args) {
+  final String? str = expEval(args[0]);
   final num code = expEval(args[1]);
-  var bg = false;
+  bool? bg = false;
   if (args.length > 2) bg = expEval(args[2]);
 
-  final pen = xtermPen(code, bg);
+  final pen = xtermPen(code as int, bg!);
 
-  return pen(str);
+  return pen(str!);
 }
 
 /// Function of [str_replace_first] command
 String commandReplaceFirst(List args) {
-  final String str = expEval(args[0]),
+  final String? str = expEval(args[0]),
       pattern1 = expEval(args[1]),
       pattern2 = expEval(args[2]);
-  return str.replaceFirst(pattern1, pattern2);
+  return str!.replaceFirst(pattern1!, pattern2!);
 }
 
 /// Function of [str_replace_all] command
 String commandReplaceAll(List args) {
-  final String str = expEval(args[0]),
+  final String? str = expEval(args[0]),
       pattern1 = expEval(args[1]),
       pattern2 = expEval(args[2]);
-  return str.replaceAll(pattern1, pattern2);
+  return str!.replaceAll(pattern1!, pattern2!);
 }
 
 /// Function of [str_contains] command
 bool commandContains(List args) {
-  final String str = expEval(args[0]), pattern = expEval(args[1]);
-  return str.contains(pattern);
+  final String? str = expEval(args[0]), pattern = expEval(args[1]);
+  return str!.contains(pattern!);
 }
 
 /// Function of [str_low] command

@@ -33,7 +33,7 @@ void main(List<String> args) async {
       final fileName = args[0];
       final r = await runLiin(filePath: fileName);
       if (r.executionTime != null) {
-        print(comment('Executed in ${r.executionTime.inMilliseconds}ms'));
+        print(comment('Executed in ${r.executionTime!.inMilliseconds}ms'));
       }
     }
   } else {
@@ -42,7 +42,7 @@ void main(List<String> args) async {
     stdout.write('>> ');
     var inputLine = stdin.readLineSync();
     while (inputLine != 'exit') {
-      await runLiin(codeLines: inputLine.split('\\\\\\'), clearAfter: false);
+      await runLiin(codeLines: inputLine!.split('\\\\\\'), clearAfter: false);
       stdout.write('>> ');
       inputLine = stdin.readLineSync();
     }

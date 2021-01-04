@@ -7,7 +7,7 @@ import '../code_runner.dart';
 void commandIf(List args) {
   final bool exp = expEval(args[0]);
   final block = defineBlockEnd(cur);
-  List<int> elseBlock;
+  List<int>? elseBlock;
   if (lines[block[1]]['command'] == 'else') {
     elseBlock = defineBlockEnd(block[1]);
   }
@@ -45,8 +45,8 @@ void commandWhile(List args) {
 
 /// Function of [run] command
 void commandRun(List args) {
-  final String name = expEval(args[0]);
-  final block = blocks[name];
+  final String? name = expEval(args[0]);
+  final block = blocks[name]!;
   final r = cur;
   runBlock(block[0], block[1], block[3]);
   cur = r;
