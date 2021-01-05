@@ -5,6 +5,12 @@
 [![Dart Version](https://img.shields.io/badge/Dart-2.8.1-blue.svg)](https://dart.dev)
 [![GitHub License](https://img.shields.io/badge/License-MIT-blue.svg)](https://raw.githubusercontent.com/uslashvlad/liin_lang/master/LICENSE)
 
+## Немного о null safety
+
+С версии 0.5.1-nullsafety я полностью перенёс проект и его зависимости на dart null safety, а значит, что теперь он требует dart от версии 2.12.0-0 и новые версии liin могут быть использованы только с этими версиями dart (ну и могут быть использованы в проектах с null safety). Когда null safety будет общим стандартом и будет в стабильной версии dart, я уберу этот текст
+
+From version 0.5.1-nullsafety I fully rewrote project for dart null safety and this is mean that it needs dart with version 2.12.0-0 or above and new versions of liin can be used only with this versions of dart (and actually new versions of liin can be used in projects with null safety). When null safety will be common standart and it'll be in dart stable channel, I'll remove this text
+
 # Что это?
 Итак, ну думаю стоит начать с того, что мне сложновато это назвать языком программирования, поэтому я называю это обычно языком инструкций. И вот этот язык можно назвать функциональным, интерпретируемый, с динамической, но строгой типизацией
 

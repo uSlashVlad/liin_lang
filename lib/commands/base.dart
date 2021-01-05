@@ -23,7 +23,8 @@ void commandLiin(List args) {
     lprint(iter.current!(_liin[i]));
   }
 
-  lprint('\n${purple('.!')} ${yellow('version')}    = ${green('"0.5.1 alpha"')}');
+  lprint(
+      '\n${purple('.!')} ${yellow('version')}    = ${green('"0.5.1 alpha"')}');
   lprint('${purple('.!')} ${yellow('nullsafety')} = ${pink('true')}');
   lprint('${purple('.!')} ${yellow('author')}     = ${green('"u/vlad"')}');
 }

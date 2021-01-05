@@ -1,9 +1,6 @@
-import 'dart:io';
-
 import 'package:expressions/expressions.dart';
 import 'enums.dart';
 import 'colors.dart';
-import 'funcs.dart';
 import 'settings_processor.dart';
 
 /// Map with regular expressions
