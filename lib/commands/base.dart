@@ -20,15 +20,15 @@ const _liin = [
 void commandLiin(List args) {
   var iter = RainbowIterator(196, 6);
   for (var i = 0; i < 5; i++) {
-    iter.moveNext();
     lprint(iter.current!(_liin[i]));
   }
 
-  lprint('\n${purple('.!')} ${yellow('version')} = ${green('"0.4.0 alpha"')}');
-  lprint('${purple('.!')} ${yellow('author')} = ${green('"u/vlad"')}');
+  lprint('\n${purple('.!')} ${yellow('version')}    = ${green('"0.5.1 alpha"')}');
+  lprint('${purple('.!')} ${yellow('nullsafety')} = ${pink('true')}');
+  lprint('${purple('.!')} ${yellow('author')}     = ${green('"u/vlad"')}');
 }
 
 /// Function of [show_context] command
 void commandShowContext(List args) {
-  print(comment('Vars: $context\nBlocks: $blocks'));
+  lprint(comment('Vars: $context\nBlocks: $blocks'));
 }

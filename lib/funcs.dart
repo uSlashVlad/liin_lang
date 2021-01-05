@@ -14,6 +14,7 @@ List<int> defineBlockEnd(int start) {
   int eor = lines[start]['indentation'];
 
   if (ior != eor) {
+    // Defines block end by checking indentation
     while (lines[start]['indentation'] >= eor) {
       start++;
     }
@@ -25,7 +26,7 @@ List<int> defineBlockEnd(int start) {
 /// Function that prints text to terminal and adds this text into output list
 void lprint(String content) {
   output.add(content);
-  print(content);
+  if (printToTerminal) print(content);
 }
 
 /// Iterator for inserted input
@@ -56,4 +57,4 @@ String linput() {
   }
 }
 
-String getFilePath(String? originalPath) => p.join(runFilePath!, originalPath);
+String getFilePath(String originalPath) => p.join(runFilePath!, originalPath);

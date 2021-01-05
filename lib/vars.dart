@@ -81,3 +81,6 @@ int indent = 0;
 
 /// Path to current file
 String? runFilePath;
+
+/// If it is true, lprint won't print anything to terminal
+bool printToTerminal = true;

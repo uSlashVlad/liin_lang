@@ -24,15 +24,21 @@ Future<LiinRunResult> runLiin({
   List<String>? codeLines,
   String? filePath,
   List<String>? runInput,
+  bool blockPrint = false,
   bool clearAfter = true,
 }) async {
+  // If input specified, insert this input
   if (runInput != null) input = runInput;
+
+  printToTerminal = !blockPrint;
 
   DateTime? startTime;
   if (codeLines != null) {
+    // If code lines specified, run them
     startTime = DateTime.now();
     await runCode(codeLines);
   } else if (filePath != null) {
+    // If no code lines specified, but file path specified
     final newPath = p.joinAll(p.split(filePath)..removeLast());
     runFilePath = newPath;
     final f = File(filePath);
@@ -46,11 +52,14 @@ Future<LiinRunResult> runLiin({
   } else {
     print(error('No code specified!'));
   }
-  final endTime = DateTime.now();
 
+  // Calculation of this run time
+  late final DateTime? endTime;
+  if (startTime != null) endTime = DateTime.now();
   Duration? executionTime;
-  if (startTime != null) executionTime = endTime.difference(startTime);
+  if (startTime != null) executionTime = endTime!.difference(startTime);
 
+  // Collecting and returning this run result
   final res = LiinRunResult(
     context: context,
     blocks: blocks,

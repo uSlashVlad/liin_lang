@@ -10,15 +10,15 @@ void commandRemove(List args) {
   } else if (collection is Map) {
     collection.remove(index);
   } else {
-    lprint(error('"cl_remove" can be used only with collections'));
+    print(error('"cl_remove" can be used only with collections'));
   }
 }
 
 /// Function of [cl_is_empty] command
-bool? commandIsEmpty(List args) => expEval(args[0]).isEmpty;
+bool commandIsEmpty(List args) => expEval(args[0])!.isEmpty;
 
 /// Function of [cl_lenght] command
-int? commandCollectionLength(List args) => expEval(args[0]).length;
+int commandCollectionLength(List args) => expEval(args[0])!.length;
 
 /// Function of [cl_place] command
 dynamic commandPlace(List args) {

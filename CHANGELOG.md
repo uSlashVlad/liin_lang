@@ -1,3 +1,15 @@
+## 0.5.1 alpha **(nullsafety)**
+
+A lot of fixes after null safety migration and some old code fixes
+
+More code comments
+
+Examples fixes
+
+README update
+
+Test!
+
 ## 0.5.0 alpha **(nullsafety)**
 
 Big migration to null safety. Here will be also some changes, but it is first commit for null safety

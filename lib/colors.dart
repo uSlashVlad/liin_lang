@@ -19,12 +19,20 @@ class RainbowIterator implements Iterator<AnsiPen?> {
   final int? max;
   int step;
 
-  AnsiPen? _currentPen;
+  late AnsiPen _currentPen;
   int _curIndex = -1;
 
+  // Gets new color and returns it if exists
   @override
-  AnsiPen? get current => _currentPen;
+  AnsiPen? get current {
+    if (moveNext()) {
+      return _currentPen;
+    } else {
+      return null;
+    }
+  }
 
+  // Tries to get next xterm color
   @override
   bool moveNext() {
     if (_curIndex == -1) _curIndex = start;
@@ -40,7 +48,9 @@ class RainbowIterator implements Iterator<AnsiPen?> {
   }
 }
 
+/// Method for creating ansipen with color from rgb
 AnsiPen rgbPen(double r, double g, double b, bool bg) =>
     AnsiPen()..rgb(r: r, g: g, b: b, bg: bg);
 
+/// Method for creating ansipen with color from xterm
 AnsiPen xtermPen(int code, [bool bg = false]) => AnsiPen()..xterm(code, bg: bg);

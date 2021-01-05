@@ -9,16 +9,20 @@ final httpClient = HttpClient();
 int includeCount = 0;
 const includeMaxCount = 1000;
 
-Future<List<Map<String, dynamic>>?> includeLines(String? path) async {
+/// Method for processing [include] setting
+Future<List<Map<String, dynamic>>?> includeLines(String path) async {
   try {
+    // Max include count here is against stack overflow and recursive includings
     if (includeCount < includeMaxCount) {
       path = getFilePath(path);
       // print(path);
       final f = File(path);
       if (f.existsSync()) {
+        // If it is local path, it includes local file
         includeCount++;
         return await defineMultiline(f.readAsLinesSync());
       } else {
+        // If here is no such local file, it tries to inclides file from the internet
         final req = await httpClient.getUrl(Uri.parse(path));
         final res = await req.close();
         final fileLines =
@@ -28,15 +32,16 @@ Future<List<Map<String, dynamic>>?> includeLines(String? path) async {
           includeCount++;
           return await defineMultiline(fileLines);
         } else {
-          lprint('Incorrect file for including. Skipping...');
+          lprint('Can\'t find any file with name "path". Skipping...');
         }
       }
     } else {
-      lprint(error('You can\'t do include more than $includeMaxCount times'));
+      print(error(
+          'You can\'t do include more than $includeMaxCount times. Exiting...'));
       exit(2);
     }
   } catch (e) {
-    lprint(error('Error while including file. Skipping...\n$e'));
+    print(error('Critical error while including file. Skipping...\n$e'));
   }
   return null;
 }

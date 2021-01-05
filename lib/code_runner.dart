@@ -23,6 +23,7 @@ void clearVars() {
   cur = 0;
   indent = 0;
   runFilePath = null;
+  printToTerminal = true;
 }
 
 /// Runs some specific block of code
@@ -77,7 +78,7 @@ void runBlock(int start, int end, int newIndent) {
         }
       }
     } catch (e) {
-      lprint(error('Error while execution line ${cur + 1}. Skipping...\n$e'));
+      print(error('Error while execution line ${cur + 1}. Skipping...\n$e'));
     }
   }
 

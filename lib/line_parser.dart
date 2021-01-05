@@ -84,25 +84,28 @@ Future<List<Map<String, dynamic>>?> defineLine(String str) async {
     result['def_type'] = def_type;
   } else if (_exps['comment_line']!.hasMatch(str) ||
       str == _exps['whitespace']!.firstMatch(str)![0]) {
+    // If this line is a comment
     result['type'] = LineType.Comment;
   } else if (_exps['setting_line']!.hasMatch(str)) {
+    // If this line is a setting
     final match = _exps['setting_capture']!.firstMatch(str);
     if (match != null) {
+      // Capturing setting params
       final name = match[1];
       final arg = match[2];
 
       if (name == 'include') {
-        return includeLines(arg);
+        return includeLines(arg!);
       } else {
-        lprint(error(
-            'Error while processing setting in line $_lineNum. Exiting...'));
+        print(error(
+            'Error while processing setting in line $_lineNum. Skipping...'));
       }
     } else {
-      lprint(error('Error while checking line $_lineNum. Exiting...'));
+      print(error('Error while checking line $_lineNum. Skipping...'));
     }
   } else {
     result['type'] = LineType.Empty;
-    lprint(error('Error while checking line $_lineNum. Exiting...'));
+    print(error('Error while checking line $_lineNum. Skipping...'));
   }
 
   return [result];
@@ -165,11 +168,10 @@ Future<List<Map<String, dynamic>>> defineMultiline(List<String> strs) async {
       if (lines != null && lines.isNotEmpty) {
         result.addAll(lines);
       } else {
-        // lprint(error());
+        // print(error());
       }
     } catch (e) {
-      lprint(error('Error while parsing line $_lineNum. Exiting...\n$e'));
-      exit(2);
+      print(error('Error while parsing line $_lineNum. Skipping...\n$e'));
     }
   }
 
